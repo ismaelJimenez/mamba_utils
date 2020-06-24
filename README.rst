@@ -9,9 +9,6 @@ Mamba-Utils
    :alt: Coverage report
 .. image:: https://img.shields.io/pypi/v/Mamba-Utils.svg
         :target: https://pypi.python.org/pypi/Mamba-Utils
-.. image:: https://img.shields.io/readthedocs/mamba-utils.svg
-        :target: https://readthedocs.org/projects/mamba-utils/builds/
-        :alt: Documentation Status
 .. image:: https://img.shields.io/badge/license-%20MIT-blue.svg
    :target: ../master/LICENSE
 
