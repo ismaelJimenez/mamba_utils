@@ -41,6 +41,8 @@ Scripts provided
 * mamba_tcp_client
 * mamba_tcp_server_mock
 
+Use "-h" to get more information about the parameters of each script.
+
 UDP Sniffer Example
 ===================
     mamba_udp_server_mock 10000
@@ -48,3 +50,11 @@ UDP Sniffer Example
     mamba_udp_sniffer 9999 10000
     
     mamba_udp_client 9999 asdf
+    
+TCP Sniffer Example
+===================
+    mamba_tcp_server_mock 10000
+    
+    mamba_tcp_sniffer 9999 10000
+    
+    mamba_tcp_client 9999 asdf
