@@ -3,7 +3,7 @@ import time
 import argparse
 
 
-def udp_client(ip: str, port: int, message: str) -> str:
+def udp_client(ip: str, port: int, message: bytes) -> bytes:
     with socket.socket(socket.AF_INET, socket.SOCK_DGRAM) as sock:
         sock.sendto(message, (ip, port))
         return sock.recv(1024)
@@ -21,8 +21,7 @@ def main():
 
     print(f'[{time.time()}] Outgoing: {msg}')
 
-    reply = udp_client(args.server_ip or '127.0.0.1', args.server_port,
-                       msg)
+    reply = udp_client(args.server_ip or '127.0.0.1', args.server_port, msg)
 
     print(f'[{time.time()}] Incoming: {reply}')
 

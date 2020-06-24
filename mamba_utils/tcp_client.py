@@ -3,7 +3,7 @@ import time
 import argparse
 
 
-def tcp_client(ip: str, port: int, message: str) -> str:
+def tcp_client(ip: str, port: int, message: bytes) -> bytes:
     with socket.socket(socket.AF_INET, socket.SOCK_STREAM) as sock:
         sock.connect((ip, port))
         sock.sendall(message)
@@ -24,8 +24,7 @@ def main():
 
     print(f'[{time.time()}] Outgoing: {msg}')
 
-    reply = tcp_client(args.server_ip or '127.0.0.1', args.server_port,
-                       msg)
+    reply = tcp_client(args.server_ip or '127.0.0.1', args.server_port, msg)
 
     print(f'[{time.time()}] Incoming: {reply}')
 

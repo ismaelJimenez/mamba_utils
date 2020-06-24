@@ -4,7 +4,7 @@ import socketserver
 import argparse
 
 
-def tcp_client(ip: str, port: int, message: str) -> str:
+def tcp_client(ip: str, port: int, message: bytes) -> bytes:
     with socket.socket(socket.AF_INET, socket.SOCK_STREAM) as sock:
         sock.connect((ip, port))
         sock.sendall(message)
@@ -21,7 +21,6 @@ class MyTCPHandler(socketserver.BaseRequestHandler):
     override the handle() method to implement communication to the
     client.
     """
-
     def handle(self):
         # self.request is the TCP socket connected to the client
         data = self.request.recv(1024).strip()
@@ -29,7 +28,8 @@ class MyTCPHandler(socketserver.BaseRequestHandler):
         if data == b'shutdown':
             raise KeyboardInterrupt()
 
-        reply = tcp_client(self.server.server_ip, self.server.server_port, data)
+        reply = tcp_client(self.server.server_ip, self.server.server_port,
+                           data)
 
         print(f'[{time.time()}] Incoming: {data}')
         print(f'[{time.time()}] Outgoing: {reply}')
@@ -50,8 +50,6 @@ def tcp_sniffer(host_ip: str, host_port: int, server_ip: str,
         try:
             server.serve_forever()
         except KeyboardInterrupt:
-            server.close()
-            server.shutdown()
             print('Mamba TCP Sniffer Finalized')
 
 
