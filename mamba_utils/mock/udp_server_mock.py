@@ -9,7 +9,13 @@ class ThreadedUDPRequestHandler(socketserver.BaseRequestHandler):
         data = self.request[0].strip()
         socket = self.request[1]
 
-        socket.sendto(data.upper(), self.client_address)
+        print(f'[{time.time()}] Incoming: {data}')
+
+        reply = data.upper()
+
+        print(f'[{time.time()}] Outgoing: {reply}')
+
+        socket.sendto(reply, self.client_address)
 
 
 class ThreadedUDPServer(socketserver.ThreadingMixIn, socketserver.UDPServer):
@@ -33,14 +39,22 @@ class UdpServerMock:
         self._server.shutdown()
 
 
-if __name__ == "__main__":
+def main():
     parser = argparse.ArgumentParser(description='UDP Server Mock.')
     parser.add_argument('host_port', type=int, help='Host port')
     parser.add_argument('--host_ip', type=str, help='Host ip')
 
     args = parser.parse_args()
 
-    mock = UdpServerMock(args.host_ip or '127.0.0.1', args.host_port)
+    UdpServerMock(args.host_ip or '127.0.0.1', args.host_port)
 
     while True:
-        time.sleep(1)
+        try:
+            time.sleep(1)
+        except KeyboardInterrupt:
+            print('Mamba UDP Server Mock Finalized')
+            break
+
+
+if __name__ == "__main__":
+    main()

@@ -45,7 +45,11 @@ setup(
     include_package_data=True,
     zip_safe=False,
     entry_points={
-        "console_scripts": ["udp_sniffer = mamba_utils:udp_sniffer"]
+        "console_scripts": [
+            "mamba_udp_sniffer = mamba_utils.udp_sniffer:main",
+            "mamba_udp_client = mamba_utils.udp_client:main",
+            "mamba_udp_server_mock = mamba_utils.mock.udp_server_mock:main",
+        ]
     },
     classifiers=[
         'Development Status :: 1 - Planning',

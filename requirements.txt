@@ -4,3 +4,6 @@ mypy
 codecov
 pytest-cov
 pycodestyle
+twine
+setuptools
+wheel

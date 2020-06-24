@@ -1,4 +1,5 @@
 import socket
+import time
 import argparse
 
 
@@ -9,7 +10,7 @@ def udp_client(ip: str, port: int, message: str) -> str:
         return sock.recv(1024)
 
 
-if __name__ == "__main__":
+def main():
     parser = argparse.ArgumentParser(description='UDP Server Mock.')
     parser.add_argument('server_port', type=int, help='Server port')
     parser.add_argument('msg', type=str, help='Message')
@@ -17,9 +18,15 @@ if __name__ == "__main__":
 
     args = parser.parse_args()
 
-    print("Sent:     {}".format(args.msg))
+    msg = bytes(args.msg, 'ascii')
+
+    print(f'[{time.time()}] Outgoing: {msg}')
 
     reply = udp_client(args.server_ip or '127.0.0.1', args.server_port,
-                       bytes(args.msg, 'ascii'))
+                       msg)
 
-    print("Received: {}".format(str(reply, 'ascii')))
+    print(f'[{time.time()}] Incoming: {reply}')
+
+
+if __name__ == "__main__":
+    main()
