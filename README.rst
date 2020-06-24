@@ -44,5 +44,7 @@ Scripts provided
 UDP Sniffer Example
 ===================
     mamba_udp_server_mock 10000
+    
     mamba_udp_sniffer 9999 10000
+    
     mamba_udp_client 9999 asdf
