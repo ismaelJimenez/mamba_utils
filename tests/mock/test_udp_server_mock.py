@@ -1,5 +1,3 @@
-import socket
-
 from mamba_utils.mock.udp_server_mock import UdpServerMock
 from mamba_utils.udp_client import udp_client
 

@@ -1,0 +1,5 @@
+[run]
+branch = true
+include = mamba_utils/*
+omit =
+  tests/*
