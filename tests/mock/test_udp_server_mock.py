@@ -1,13 +1,7 @@
 import socket
 
 from mamba_utils.mock.udp_server_mock import UdpServerMock
-
-
-def client(ip, port, message):
-    with socket.socket(socket.AF_INET, socket.SOCK_DGRAM) as sock:
-        sock.connect((ip, port))
-        sock.sendall(bytes(message, 'ascii'))
-        return str(sock.recv(1024), 'ascii')
+from mamba_utils.udp_client import udp_client
 
 
 class TestClass:
@@ -16,11 +10,11 @@ class TestClass:
 
         mock = UdpServerMock(host, port)
 
-        reply = client(host, port, "Hello World 1")
-        assert reply == 'HELLO WORLD 1'
-        reply = client(host, port, "Hello World 2")
-        assert reply == 'HELLO WORLD 2'
-        reply = client(host, port, "Hello World 3")
-        assert reply == 'HELLO WORLD 3'
+        reply = udp_client(host, port, b"Hello World 1")
+        assert reply == b'HELLO WORLD 1'
+        reply = udp_client(host, port, b"Hello World 2")
+        assert reply == b'HELLO WORLD 2'
+        reply = udp_client(host, port, b"Hello World 3")
+        assert reply == b'HELLO WORLD 3'
 
         mock.shutdown()
