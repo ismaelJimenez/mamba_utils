@@ -19,6 +19,7 @@ if __name__ == "__main__":
 
     print("Sent:     {}".format(args.msg))
 
-    reply = udp_client(args.server_ip or '127.0.0.1', args.server_port, bytes(args.msg, 'ascii'))
+    reply = udp_client(args.server_ip or '127.0.0.1', args.server_port,
+                       bytes(args.msg, 'ascii'))
 
     print("Received: {}".format(str(reply, 'ascii')))

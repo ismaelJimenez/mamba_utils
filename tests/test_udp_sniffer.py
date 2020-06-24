@@ -11,7 +11,9 @@ class TestClass:
 
         mock = UdpServerMock(server_ip, server_port)
 
-        sniffer = threading.Thread(target=udp_sniffer, args=(host_ip, host_port, server_ip, server_port))
+        sniffer = threading.Thread(target=udp_sniffer,
+                                   args=(host_ip, host_port, server_ip,
+                                         server_port))
         sniffer.start()
 
         import time

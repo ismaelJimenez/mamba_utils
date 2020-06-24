@@ -15,14 +15,16 @@ class MyUDPHandler(socketserver.BaseRequestHandler):
         data = self.request[0].strip()
         socket = self.request[1]
 
-        reply = udp_client(self.server.server_ip, self.server.server_port, data)
+        reply = udp_client(self.server.server_ip, self.server.server_port,
+                           data)
         socket.sendto(reply, self.client_address)
 
         if data == b'shutdown':
             exit()
 
 
-def udp_sniffer(host_ip: str, host_port: int, server_ip: str, server_port: int) -> None:
+def udp_sniffer(host_ip: str, host_port: int, server_ip: str,
+                server_port: int) -> None:
     with socketserver.UDPServer((host_ip, host_port), MyUDPHandler) as server:
         server.server_ip = server_ip
         server.server_port = server_port
@@ -38,5 +40,5 @@ if __name__ == "__main__":
 
     args = parser.parse_args()
 
-    udp_sniffer(args.host_ip or '127.0.0.1', args.host_port,
-                args.server_ip or '127.0.0.1', args.server_port)
+    udp_sniffer(args.host_ip or '127.0.0.1', args.host_port, args.server_ip
+                or '127.0.0.1', args.server_port)
