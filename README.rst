@@ -31,3 +31,12 @@ Install
 The quick way::
 
     pip install mamba-utils
+    
+Scripts provided
+================
+* mamba_udp_sniffer
+* mamba_udp_client
+* mamba_udp_server_mock
+* mamba_tcp_sniffer
+* mamba_tcp_client
+* mamba_tcp_server_mock
