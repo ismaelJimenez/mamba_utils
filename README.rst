@@ -40,3 +40,9 @@ Scripts provided
 * mamba_tcp_sniffer
 * mamba_tcp_client
 * mamba_tcp_server_mock
+
+UDP Sniffer Example
+===================
+    mamba_udp_server_mock 10000
+    mamba_udp_sniffer 9999 10000
+    mamba_udp_client 9999 asdf
