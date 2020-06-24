@@ -2,3 +2,4 @@ pytest==5.4.3
 yapf
 mypy
 codecov
+pycodestyle
