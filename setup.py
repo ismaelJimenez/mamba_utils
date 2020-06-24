@@ -49,6 +49,9 @@ setup(
             "mamba_udp_sniffer = mamba_utils.udp_sniffer:main",
             "mamba_udp_client = mamba_utils.udp_client:main",
             "mamba_udp_server_mock = mamba_utils.mock.udp_server_mock:main",
+            "mamba_tcp_sniffer = mamba_utils.tcp_sniffer:main",
+            "mamba_tcp_client = mamba_utils.tcp_client:main",
+            "mamba_tcp_server_mock = mamba_utils.mock.tcp_server_mock:main",
         ]
     },
     classifiers=[

@@ -1,4 +1,5 @@
 import threading
+import time
 
 from mamba_utils.mock.udp_server_mock import UdpServerMock
 from mamba_utils.udp_sniffer import udp_sniffer, udp_client
@@ -16,7 +17,6 @@ class TestClass:
                                          server_port))
         sniffer.start()
 
-        import time
         time.sleep(.1)
 
         reply = udp_client(host_ip, host_port, b"Hello World 1")

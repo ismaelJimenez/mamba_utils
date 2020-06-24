@@ -6,8 +6,7 @@ import argparse
 
 def udp_client(ip: str, port: int, message: str) -> str:
     with socket.socket(socket.AF_INET, socket.SOCK_DGRAM) as sock:
-        sock.connect((ip, port))
-        sock.sendall(message)
+        sock.sendto(message, (ip, port))
         return sock.recv(1024)
 
 

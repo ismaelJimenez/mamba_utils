@@ -4,10 +4,9 @@ import argparse
 import time
 
 
-class ThreadedUDPRequestHandler(socketserver.BaseRequestHandler):
+class ThreadedTCPRequestHandler(socketserver.BaseRequestHandler):
     def handle(self):
-        data = self.request[0].strip()
-        socket = self.request[1]
+        data = str(self.request.recv(1024), 'ascii')
 
         print(f'[{time.time()}] Incoming: {data}')
 
@@ -15,17 +14,18 @@ class ThreadedUDPRequestHandler(socketserver.BaseRequestHandler):
 
         print(f'[{time.time()}] Outgoing: {reply}')
 
-        socket.sendto(reply, self.client_address)
+        self.request.sendall(bytes(reply, 'ascii'))
 
 
-class ThreadedUDPServer(socketserver.ThreadingMixIn, socketserver.UDPServer):
+class ThreadedTCPServer(socketserver.ThreadingMixIn, socketserver.TCPServer):
     pass
 
 
-class UdpServerMock:
+class TcpServerMock:
     def __init__(self, host, port):
-        self._server = ThreadedUDPServer((host, port),
-                                         ThreadedUDPRequestHandler)
+        socketserver.TCPServer.allow_reuse_address = True
+        self._server = ThreadedTCPServer((host, port),
+                                         ThreadedTCPRequestHandler)
 
         # Start a thread with the server -- that thread will then start one
         # more thread for each request
@@ -41,19 +41,19 @@ class UdpServerMock:
 
 
 def main():
-    parser = argparse.ArgumentParser(description='UDP Server Mock.')
+    parser = argparse.ArgumentParser(description='TCP Server Mock.')
     parser.add_argument('host_port', type=int, help='Host port')
     parser.add_argument('--host_ip', type=str, help='Host ip')
 
     args = parser.parse_args()
 
-    UdpServerMock(args.host_ip or '127.0.0.1', args.host_port)
+    TcpServerMock(args.host_ip or '127.0.0.1', args.host_port)
 
     while True:
         try:
             time.sleep(1)
         except KeyboardInterrupt:
-            print('Mamba UDP Server Mock Finalized')
+            print('Mamba TCP Server Mock Finalized')
             break
 
 
